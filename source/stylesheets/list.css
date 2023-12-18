@@ -1,0 +1,39 @@
+/* variables */
+
+#cemetery-list {
+  --list-pic-width: 50px;
+}
+
+/* typography */
+
+.list-heading {
+  font-size: var(--entry-h2-font);
+}
+
+.list-entry-name {
+  font-size: var(--entry-p-font);
+}
+
+/* list layout */
+
+#cemetery-list {
+  display: grid;
+  margin-top: 25px;
+  gap: 1.5ch;
+}
+
+/* list-entry layout */
+
+#cemetery-list > .list-entry {
+  display: grid;
+  gap: 1ch;
+  align-items: center;
+  grid-template-columns: var(--list-pic-width) auto;
+  grid-template-rows: 1fr;
+}
+
+.list-entry-pic {
+  width: var(--list-pic-width);
+  height: auto;
+  border-radius: 5px;
+}

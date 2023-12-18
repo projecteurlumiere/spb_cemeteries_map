@@ -1,0 +1,67 @@
+/* import font */
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap');
+
+/* import icons */
+
+/* list */
+@import url(https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200);
+/* church-cross */
+@import url(https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200);
+/* question */
+@import url(https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200);
+
+/* global variables */
+
+:root {
+  /* sidebar content widths */
+  --sidebar-max-content-width: 380px;
+  --sidebar-mid-content-width: 310px;
+  --sidebar-min-content-width: 225px;
+
+  /* entry */
+  /* typography */
+  --entry-h2-font: 1.75rem;
+  --entry-h2-font-weight: 700;
+  --entry-h3-font: 1.5rem;
+  --entry-p-font: 1rem;
+
+}
+
+/* default override */
+
+* {
+  font-family: 'PT Serif', serif;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+h2,
+h3 {
+  margin: 0.25rem 0;
+}
+
+p {
+  margin: 0.25rem 0;
+}
+
+/* map */
+
+#map {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  justify-content: center;
+  /* filter: grayscale(80%); */
+}
+
+/* sidebar tabs */
+
+.leaflet-sidebar-tabs > ul > li > a {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
