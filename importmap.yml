@@ -1,0 +1,9 @@
+imports:
+  "turbo": ./javascripts/vendor/turbo.es2017-esm.js
+  "stimulus": ./javascripts/vendor/stimulus.js
+  "fslightbox": ./javascripts/vendor/fslightbox.js
+  "leaflet": ./javascripts/vendor/leaflet.js
+  "leaflet-sidebar-v2": ./javascripts/vendor/leaflet-sidebar-v2.js
+  "cemetery": ./javascripts/controllers/cemetery_controller.js
+  "gallery": ./javascripts/controllers/gallery_controller.js
+  "map": ./javascripts/controllers/map_controller.js
