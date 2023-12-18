@@ -1,0 +1,10 @@
+<li>
+  <%= link_to photo.link, data: { fslightbox: 'gallery', 
+  class: "gallery-pic-full" } do %>
+    <% if index < 5 %>
+      <%= image_tag photo.thumb_link, data: { class: "gallery-pic-thumb"} %>
+    <% elsif index == 5 %>
+      <%= link_to "Ещё #{@photos.count - 5} фото", "", { class: "gallery-n-more-link lightbox-opener" } %>
+    <% end %>
+  <% end %>
+</li>

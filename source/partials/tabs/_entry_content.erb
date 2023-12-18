@@ -1,0 +1,24 @@
+<% content_tag "turbo-frame", id: "entry", data: {"cemetery-id-value": 1001} do %>
+    <h2 class="entry-main-heading">Here goes Heading></h2>
+    <%# if photos exist %>
+      <div class="entry-gallery-container">
+        <div class="entry-gallery-heading-container">
+          <h3 class="entry-gallery-heading">Галерея</h3>
+          <a href="" class="gallery-n-more-link-top lightbox-opener">Смотреть все (CКОЛЬКО?) фото</a>
+        </div>
+        <% content_tag "ul", class: "photo-gallery", data: { controller: "gallery" } do %>
+          <%= partial "partials/tabs/components/gallery" %>
+        <% end %>
+      </div>
+    <%# end %>
+    <div class="entry-description-container">
+      <h3 class="entry-description-heading">Описание</h3>
+      <div class="entry-description-text-container">
+        <p>
+          <% 5.times do %>
+            <%= lorem.sentence %>
+          <% end %>
+        </p>
+      </div>
+    </div>
+<% end %>
