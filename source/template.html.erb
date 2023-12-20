@@ -5,6 +5,6 @@
                   action: "cemetery:connect->map#drawPolygon cemetery:connect->map#toInitialEntry"
                   } do %>
     <div id="map" class="sidebar-map"></div>
-    <%= partial "partials/sidebar" %>
+    <%= partial "partials/sidebar", locals: { cemetery: cemetery } %>
   <% end %>
 </main>
