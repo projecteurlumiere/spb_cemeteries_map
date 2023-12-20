@@ -1,10 +1,6 @@
 id: 1
 name_url: supercemetery
 name: supercemetery
-coordinates:
-  point:
-  polygon:
-  geo_json:
 open_year: 1800
 close_year: 1920
 description:
@@ -19,3 +15,7 @@ sources:
   - Officiis quas est. Autem ut ex one
   - Officiis quas est. Autem ut ex two
   - Officiis quas est. Autem ut ex three
+coordinates:
+  point:
+  polygon:
+  geo_json:

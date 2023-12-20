@@ -23,7 +23,7 @@ export default class extends Controller {
       position: 'left',     // left or right
     }).addTo(this.map);
 
-    this.sidebar.open('list-tab');
+    this.sidebar.open('list');
   }
 
   drawPolygon(e) {
@@ -48,7 +48,7 @@ export default class extends Controller {
 
     polygon.addEventListener('click', () => {
       this.#toEntry(polygon);
-      Turbo.visit(`/cemeteries/${e.detail.id}`, { action: 'advance', frame: 'entry' }); // doesn't update URL despite action: advance- apparently, rails bug
+      Turbo.visit(`/${e.detail.id}`, { action: 'advance', frame: 'entry-content' }); // doesn't update URL despite action: advance- apparently, rails bug
     })
 
   }
@@ -66,10 +66,10 @@ export default class extends Controller {
   }
 
   #toEntry(polygon){
-    this.sidebar.enablePanel('entry-info'); // should i overoptimize this?
+    this.sidebar.enablePanel('entry'); // should i overoptimize this?
 
     this.#centerMap(polygon);
-    this.sidebar.open('entry-info');
+    this.sidebar.open('entry');
   }
 
   #centerMap(polygon) {
@@ -86,7 +86,7 @@ export default class extends Controller {
   #isShowRequest() {
     if (window.location.toString().includes("/cemeteries/")) {
       this.isShowRequest = true;
-      this.initialEntryId = document.getElementById('entry').getAttribute('data-cemetery-id-value');
+      this.initialEntryId = document.getElementById('entry_content').getAttribute('data-cemetery-id-value');
     }
     else this.isShowRequest = false
   }

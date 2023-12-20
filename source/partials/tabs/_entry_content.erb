@@ -1,5 +1,5 @@
 <% cemetery = data.send(cemetery) %>
-<% content_tag "turbo-frame", id: "entry", data: { id: cemetery.id } do %>
+<% content_tag "turbo-frame", id: "entry-content", data: { id: cemetery.id } do %>
     <h2>
       <%= cemetery.name %>
     </h2>
@@ -8,17 +8,15 @@
       <p>Год закрытия: <%= cemetery.close_year %></p>
     <% end %>
 
-    <%# if photos exist %>
-      <div class="entry-gallery-container">
-        <div class="entry-gallery-heading-container">
+    <div id="gallery-container">
+      <div class="heading">
           <h3 class="entry-gallery-heading">Галерея</h3>
           <a href="" class="gallery-n-more-link-top lightbox-opener">Смотреть все (CКОЛЬКО?) фото</a>
         </div>
-        <% content_tag "ul", class: "photo-gallery", data: { controller: "gallery" } do %>
-          <%= partial "partials/tabs/components/gallery" %>
-        <% end %>
-      </div>
-    <%# end %>
+      <% content_tag "ul", class: "gallery", data: { controller: "gallery" } do %>
+        <%= partial "partials/tabs/components/gallery" %>
+      <% end %>
+    </div>
 
     <div class="entry-description-container">
       <h3 class="entry-description-heading">Описание</h3>

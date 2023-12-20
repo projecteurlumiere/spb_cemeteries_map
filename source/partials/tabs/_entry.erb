@@ -1,14 +1,12 @@
-  <div class="leaflet-sidebar-pane" id="entry-info">
-    <h1 class="leaflet-sidebar-header">
-      <div class="leaflet-sidebar-close"><i class="fa fa-caret-left">X</i></div>
-    </h1>
-    <div id="content-container-entry-info">
+<div class="leaflet-sidebar-pane" id="entry">
+  <h1 class="leaflet-sidebar-header">
+    <div class="leaflet-sidebar-close"><i class="fa fa-caret-left">X</i></div>
+  </h1>
 
-      <% if cemetery %>
-        <%= partial "partials/tabs/entry_content", locals: { cemetery: cemetery } %>
-      <% else %>
-        <%= tag "turbo-frame", id: "entry", data: { id: 0 } %>
-      <% end %>
+  <% if cemetery %>
+    <%= partial "partials/tabs/entry_content", locals: { cemetery: cemetery } %>
+  <% else %>
+    <%= tag "turbo-frame", id: "entry-content", data: { id: 0 } %>
+  <% end %>
 
-    </div>
-  </div>
+</div>

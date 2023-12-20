@@ -9,6 +9,6 @@ import { Application } from "stimulus"
 
 window.Stimulus = Application.start();
 
+Stimulus.register("map", MapController);
 Stimulus.register("cemetery", CemeteryController);
 Stimulus.register("gallery", GalleryController);
-Stimulus.register("map", MapController);

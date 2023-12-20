@@ -2,7 +2,7 @@
 /* sidebar's content default width: 380px */
 
 #entry {
-  display: grid;
+  /* display: grid; */
   justify-content: first baseline;
   gap: 1ch;
   grid-auto-columns: 1fr;

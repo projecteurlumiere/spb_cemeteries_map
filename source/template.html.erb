@@ -1,10 +1,8 @@
 <main>
-  <% content_tag "div",id: "map-container",
-                data: {
+  <%= tag "div",id: "map",
+                  data: {
                   controller: "map",
                   action: "cemetery:connect->map#drawPolygon cemetery:connect->map#toInitialEntry"
-                  } do %>
-    <div id="map" class="sidebar-map"></div>
-    <%= partial "partials/sidebar", locals: { cemetery: cemetery } %>
-  <% end %>
+                  } %>
+  <%= partial "partials/sidebar", locals: { cemetery: cemetery } %>
 </main>
