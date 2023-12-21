@@ -3,13 +3,18 @@ import L from 'leaflet'
 import "leaflet-sidebar-v2"
 
 export default class extends Controller {
-  cityCoordinates = [59.8965, 30.3264]; // coordinates for spb city center
+  static values = {
+    startPoint: Array
+  }
+
+  // cityCoordinates = [59.8965, 30.3264]; // coordinates for spb city center
   polygons = {};
 
   connect() {
-    this.#isShowRequest();  // if true, it will zoom map to the desired entry
+    console.log("starting connect");
+    console.log(this.startPointValue);
 
-    this.map = L.map('map').setView(this.cityCoordinates, 10);
+    this.map = L.map('map').setView(this.startPointValue, 10);
 
     L.tileLayer(`https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.{ext}`, {
       minZoom: 10,
@@ -31,11 +36,11 @@ export default class extends Controller {
     console.log(e.detail);
     let polygon;
 
-    if (e.detail.coordinatesGeoJSON) {
+    if (e.detail.coordinates.geoJSON) {
        console.log("draw polygon geojson shots");
        polygon = L.geoJSON(JSON.parse(e.detail.coordinatesGeoJSON))
     }
-    else if (e.detail.coordinates) {
+    else if (e.detail.coordinates.polygon) {
       polygon = L.polygon(e.detail.coordinates, {cemetery_id: e.detail.id});
     }
     else return
@@ -84,9 +89,10 @@ export default class extends Controller {
   }
 
   #isShowRequest() {
-    if (window.location.toString().includes("/cemeteries/")) {
+    console.log(window.location);
+    if (window.location.pathname != "/") {
       this.isShowRequest = true;
-      this.initialEntryId = document.getElementById('entry_content').getAttribute('data-cemetery-id-value');
+      this.initialEntryId = document.getElementById('entry-content').getAttribute('data-cemetery-id-value');
     }
     else this.isShowRequest = false
   }

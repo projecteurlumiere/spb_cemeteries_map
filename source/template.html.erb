@@ -2,7 +2,8 @@
   <%= tag "div",id: "map",
                   data: {
                   controller: "map",
-                  action: "cemetery:connect->map#drawPolygon cemetery:connect->map#toInitialEntry"
+                  action: "catalogue:process->map#drawPolygon catalogue:finish->map#toInitialEntry",
+                  map_start_point_value: JSON.dump([59.8965, 30.3264])
                   } %>
   <%= partial "partials/sidebar", locals: { cemetery: cemetery } %>
 </main>

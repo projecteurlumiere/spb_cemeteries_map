@@ -1,19 +1,20 @@
 <h2 class="list-heading">Старые и новые кладбища Петербурга</h2>
-<ul id="cemetery-list">
+<ul id="cemetery-list" data-controller="catalogue">
   <% data.cemeteries.each do |cemetery_name| %>
     <% cemetery = data.send(cemetery_name) %>
     <li>
       <%# image_tag cemetery.main_thumb_pic_link, class: "list-entry-pic" %>
       <%= link_to cemetery.name, cemetery.name_url, class: 'cemetery-preview',
         data: {
-          turbo_frame: 'entry-content',
-          controller: 'cemetery',
-          turbo_action: 'advance',
-          action: 'click->map#toEntryByEvent',
-          'cemetery-id-value': cemetery.id,
-          'cemetery-coordinates-value': cemetery.coordinates.polygon,
-          'cemetery-coordinates-geo-json-value': cemetery.coordinates.geo_json
-
+          turbo_frame: "entry-content",
+          turbo_action: "advance",
+          catalogue_target: "cemetery",
+          action: "click->map#toEntryByEvent",
+          id: cemetery.id,
+          name_url: cemetery.name_url,
+          point: cemetery.coordinates.point,
+          coordinates: cemetery.coordinates.polygon,
+          geo_json: cemetery.coordinates.geo_json
          } %>
     </li>
   <% end %>
