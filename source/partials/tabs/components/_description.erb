@@ -1,6 +1,6 @@
 <h3>Описание</h3>
-<% cemetery.description.each do |key, paragraph| %>
-  <% content_tag "p", class: key do %>
+<% cemetery.description.each do |paragraph| %>
+  <% content_tag "p" do %>
     <%= paragraph %>
   <% end %>
 <% end %>
