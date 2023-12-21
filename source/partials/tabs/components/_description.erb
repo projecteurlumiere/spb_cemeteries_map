@@ -1,0 +1,7 @@
+<h3>Описание</h3>
+<% cemetery.description.each do |key, paragraph| %>
+  <% content_tag "p", class: key do %>
+    <%= paragraph %>
+  <% end %>
+<% end %>
+

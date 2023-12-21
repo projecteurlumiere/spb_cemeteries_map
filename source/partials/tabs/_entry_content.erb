@@ -1,47 +1,12 @@
-<% cemetery = data.send(cemetery) %>
-<% content_tag "turbo-frame", id: "entry-content", data: { id: cemetery.id } do %>
-    <h2>
-      <%= cemetery.name %>
-    </h2>
-    <p>Год открытия: <%= cemetery.open_year %></p>
-    <% if cemetery.close_year %>
-      <p>Год закрытия: <%= cemetery.close_year %></p>
-    <% end %>
+<h2><%= cemetery.name %></h2>
 
-    <div id="gallery-container">
-      <div class="heading">
-          <h3 class="entry-gallery-heading">Галерея</h3>
-          <a href="" class="gallery-n-more-link-top lightbox-opener">Смотреть все (CКОЛЬКО?) фото</a>
-        </div>
-      <% content_tag "ul", class: "gallery", data: { controller: "gallery" } do %>
-        <%= partial "partials/tabs/components/gallery" %>
-      <% end %>
-    </div>
+<%= partial "partials/tabs/components/years", locals: { cemetery: cemetery } %>
 
-    <div class="entry-description-container">
-      <h3 class="entry-description-heading">Описание</h3>
-      <div class="entry-description-text-container">
-        <% cemetery.description.each do |key, paragraph| %>
-          <% content_tag "p", class: key do %>
-            <%= paragraph %>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
-    <ul class="notable-individuals">
-      <% cemetery.notable_individuals.each do |individual| %>
-        <li>
-          <%= individual.name %>
-          <%= individual.years %>
-          <%= individual.occupation %>
-        </li>
-      <% end %>
-    </ul>
-    <ul class="sources">
-      <% cemetery.sources.each do |source| %>
-        <li>
-          <%= source %>
-        </li>
-      <% end %>
-    </ul>
-<% end %>
+<%= partial "partials/tabs/components/gallery", locals: { cemetery: cemetery } %>
+
+<%= partial "partials/tabs/components/description", locals: { cemetery: cemetery } %>
+
+<%= partial "partials/tabs/components/notable_individuals", locals: { cemetery: cemetery } %>
+
+<%= partial "partials/tabs/components/sources", locals: { cemetery: cemetery }  %>
+

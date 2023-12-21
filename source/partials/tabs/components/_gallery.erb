@@ -1,4 +1,15 @@
-<div>Photos yay!</div>
+<div class="gallery-container">
+  <h3 class="entry-gallery-heading">Галерея</h3>
+  <a href="" class="gallery-n-more-link-top lightbox-opener">Смотреть все (CКОЛЬКО?) фото</a>
+
+  <% content_tag "ul", class: "gallery", data: { controller: "gallery" } do %>
+    <div>Photos yay!</div>
+  <% end %>
+</div>
+
+
 <%# @photos.each_with_index do |photo, index| %>
   <%# render partial: 'gallery_pic', locals: {photo: photo, index: index} %>
 <%# end %>
+
+

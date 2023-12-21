@@ -3,10 +3,14 @@
     <div class="leaflet-sidebar-close"><i class="fa fa-caret-left">X</i></div>
   </h1>
 
-  <% if cemetery %>
-    <%= partial "partials/tabs/entry_content", locals: { cemetery: cemetery } %>
-  <% else %>
-    <%= tag "turbo-frame", id: "entry-content", data: { id: 0 } %>
-  <% end %>
+  <div class="content">
+    <% if cemetery %>
+      <% content_tag "turbo-frame", id: "entry-content", data: { id: data.send(cemetery).id } do %>
+        <%= partial "partials/tabs/entry_content", locals: { cemetery: data.send(cemetery) } %>
+      <% end %>
+    <% else %>
+      <%= tag "turbo-frame", id: "entry-content", data: { id: 0 } %>
+    <% end %>
+  </div>
 
 </div>

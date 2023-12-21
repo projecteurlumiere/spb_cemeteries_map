@@ -1,0 +1,9 @@
+<ul class="notable-individuals">
+  <% cemetery.notable_individuals.each do |individual| %>
+    <li>
+      <%= individual.name %>
+      <%= individual.years %>
+      <%= individual.occupation %>
+    </li>
+  <% end %>
+</ul>
