@@ -80,7 +80,7 @@ export default class extends Controller {
         this.map.flyTo(figure.getLatLng(), 14);
         break;
       case figure instanceof L.Polygon:
-        this.map.flyTo(figure.getCenter(), 14)
+        this.map.flyTo(figure.getCenter(), 14);
         break
       case figure instanceof L.GeoJSON:
         this.map.flyTo(figure.getBounds().getCenter(), 14);
