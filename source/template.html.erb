@@ -2,8 +2,10 @@
   <%= tag "div",id: "map",
                   data: {
                   controller: "map",
-                  action: "catalogue:process->map#drawPolygon catalogue:finish->map#toInitialEntry",
-                  map_start_point_value: JSON.dump([59.8965, 30.3264])
+                  action: "catalogue:process->map#drawPolygon catalogue:finish->map#toEntry",
+                  map_start_point_value: JSON.dump([59.8965, 30.3264]),
+                  map_tiles_provider_value: "https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.{ext}",
+                  map_attribution_value: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                   } %>
   <%= partial "partials/sidebar", locals: { cemetery: cemetery } %>
 </main>

@@ -4,96 +4,87 @@ import "leaflet-sidebar-v2"
 
 export default class extends Controller {
   static values = {
-    startPoint: Array
+    startPoint: Array,
+    tilesProvider: String,
+    attribution: String
   }
 
-  // cityCoordinates = [59.8965, 30.3264]; // coordinates for spb city center
-  polygons = {};
+  figures = {}
 
   connect() {
-    console.log("starting connect");
-    console.log(this.startPointValue);
-
-    this.map = L.map('map').setView(this.startPointValue, 10);
-
-    L.tileLayer(`https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.{ext}`, {
-      minZoom: 10,
-      attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      ext: 'png'
-    }).addTo(this.map);
-
-    this.sidebar = L.control.sidebar({
-      container: 'sidebar', // the DOM container or #ID of a predefined sidebar container that should be used
-      closeButton: true,    // whether t add a close button to the panes
-      position: 'left',     // left or right
-    }).addTo(this.map);
-
-    this.sidebar.open('list');
+    this.#setMap();
+    this.#setSidebar();
+    this.sidebar.open("list");
   }
 
   drawPolygon(e) {
-    console.log("draw polygon shots");
-    console.log(e.detail);
-    let polygon;
+    let coordinates = e.detail.coordinatesType === "geojson" ? e.detail.coordinates : JSON.parse(e.detail.coordinates);
 
-    if (e.detail.coordinates.geoJSON) {
-       console.log("draw polygon geojson shots");
-       polygon = L.geoJSON(JSON.parse(e.detail.coordinatesGeoJSON))
-    }
-    else if (e.detail.coordinates.polygon) {
-      polygon = L.polygon(e.detail.coordinates, {cemetery_id: e.detail.id});
-    }
-    else return
+    let figure = this.#figureByType(e.detail.coordinatesType, coordinates);
 
-    console.log("add to map is about to happen");
+    figure.addTo(this.map);
 
-    polygon.addTo(this.map);
-
-    this.polygons[e.detail.id] = polygon;
-
-    polygon.addEventListener('click', () => {
-      this.#toEntry(polygon);
-      Turbo.visit(`/${e.detail.id}`, { action: 'advance', frame: 'entry-content' }); // doesn't update URL despite action: advance- apparently, rails bug
-    })
-
+    figure.getElement().dataset.action = "click->map#toEntry";
+    figure.getElement().dataset.mapIdParam = e.detail.id;
+    this.figures[e.detail.id] = figure;
   }
 
-  // in the app view, drawPolygon fires first followed by this method:
-  toInitialEntry(e) {
-    if (this.isShowRequest === true && this.initialEntryId == e.detail.id) {
-      this.toEntryByEvent(e);
-    }
+  toEntry(e) {
+    let id = e.params.id || e.detail.id;
+    let figure = this.figures[id];
+
+    this.sidebar.enablePanel("entry");
+    this.sidebar.open("entry");
+    this.#centerMap(figure);
   }
 
-  toEntryByEvent(e) {
-    let polygon = this.polygons[e.target.getAttribute("data-cemetery-id-value")];
-    this.#toEntry(polygon);
+  #setMap(){
+    this.map = L.map("map").setView(this.startPointValue, 10);
+
+    L.tileLayer(this.tilesProviderValue, {
+      minZoom: 10,
+      attribution: this.attributionValue,
+      ext: "png"
+    }).addTo(this.map);
   }
 
-  #toEntry(polygon){
-    this.sidebar.enablePanel('entry'); // should i overoptimize this?
-
-    this.#centerMap(polygon);
-    this.sidebar.open('entry');
+  #setSidebar(){
+    this.sidebar = L.control.sidebar({
+      container: "sidebar", // the DOM container or #ID of a predefined sidebar container that should be used
+      closeButton: true,    // whether t add a close button to the panes
+      position: "left",     // left or right
+    }).addTo(this.map);
   }
 
-  #centerMap(polygon) {
-    try {
-      if (polygon) {
-        this.map.flyTo(polygon.getCenter(), 14)
+  #figureByType(type, coordinates) {
+    switch (type) {
+      case "marker": {
+        return L.marker(coordinates)
       }
-    } catch (error) {
-      this.map.flyTo(polygon.getBounds().getCenter(), 14);
-
+      case "polygon": {
+        return L.polygon(coordinates)
+      }
+      case "geojson":{
+        return L.geoJSON(coordinates)
+      }
+      default: {
+        console.log("no figure to draw");
+        return
+      }
     }
   }
 
-  #isShowRequest() {
-    console.log(window.location);
-    if (window.location.pathname != "/") {
-      this.isShowRequest = true;
-      this.initialEntryId = document.getElementById('entry-content').getAttribute('data-cemetery-id-value');
+  #centerMap(figure) {
+    switch (true) {
+      case figure instanceof L.Marker:
+        this.map.flyTo(figure.getLatLng(), 14);
+        break;
+      case figure instanceof L.Polygon:
+        this.map.flyTo(figure.getCenter(), 14)
+        break
+      case figure instanceof L.GeoJSON:
+        this.map.flyTo(figure.getBounds().getCenter(), 14);
+        break
     }
-    else this.isShowRequest = false
   }
 }

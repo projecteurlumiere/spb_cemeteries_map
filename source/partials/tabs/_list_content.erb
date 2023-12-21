@@ -4,17 +4,17 @@
     <% cemetery = data.send(cemetery_name) %>
     <li>
       <%# image_tag cemetery.main_thumb_pic_link, class: "list-entry-pic" %>
-      <%= link_to cemetery.name, cemetery.name_url, class: 'cemetery-preview',
+      <%= link_to cemetery.name, cemetery.path, class: 'cemetery-preview',
         data: {
           turbo_frame: "entry-content",
           turbo_action: "advance",
           catalogue_target: "cemetery",
-          action: "click->map#toEntryByEvent",
+          action: "click->map#toEntry",
+          map_id_param: cemetery.id,
           id: cemetery.id,
-          name_url: cemetery.name_url,
-          point: cemetery.coordinates.point,
-          coordinates: cemetery.coordinates.polygon,
-          geo_json: cemetery.coordinates.geo_json
+          path: cemetery.path,
+          coordinates_type: cemetery.coordinates_type,
+          coordinates: cemetery.coordinates_type == "geojson" ? cemetery.coordinates : JSON.dump(cemetery.coordinates),
          } %>
     </li>
   <% end %>

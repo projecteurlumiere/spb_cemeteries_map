@@ -21,9 +21,9 @@ export default class extends Controller {
     }
   }
 
-  // removes trailing slash
+  // removes trailing slashes
   #preparePath(){
-    let path = window.location.pathname;
+    let path = window.location.pathname.substring(1);
     let lastSymbolIndex = path.length - 1;
 
     return path[lastSymbolIndex] === "/" ? path.substring(0, lastSymbolIndex) : path
@@ -35,16 +35,11 @@ export default class extends Controller {
 
       this.dispatch("process", { detail: {
         id: e.id,
-        coordinates: {
-          point: e.point,
-          polygon: e.polygon ? JSON.parse(e.polygon) : undefined,
-          geoJSON: e.geoJSON
-        }
+        coordinates: e.coordinates,
+        coordinatesType: e.coordinatesType
       }});
 
-      if (this.path === e.name_url) {
-        this.initialEntryId = e.id;
-      }
+      if (this.path === e.path) this.initialEntryId = e.id;
     });
   }
 }
