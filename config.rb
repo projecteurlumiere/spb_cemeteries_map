@@ -10,7 +10,7 @@ page '/*.txt', layout: false
 
 after_configuration do
   proxy "index.html", "template.html", locals: { cemetery: nil }
-  @app.data.cemeteries.each do |cemetery|
+  @app.data.catalogue.each do |cemetery|
     proxy "#{cemetery}/index.html", "template.html", locals: { cemetery: cemetery }
   end
 end

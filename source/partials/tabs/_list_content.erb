@@ -1,6 +1,6 @@
 <h2 class="list-heading">Старые и новые кладбища Петербурга</h2>
 <ul id="cemetery-list" data-controller="catalogue">
-  <% data.cemeteries.each do |cemetery_name| %>
+  <% data.catalogue.each do |cemetery_name| %>
     <% cemetery = data.send(cemetery_name) %>
     <li>
       <%# image_tag cemetery.main_thumb_pic_link, class: "list-entry-pic" %>

@@ -1,7 +1,2 @@
 <h3>Описание</h3>
-<% cemetery.description.each do |paragraph| %>
-  <% content_tag "p" do %>
-    <%= paragraph %>
-  <% end %>
-<% end %>
-
+<%= simple_format(cemetery.description) %>
