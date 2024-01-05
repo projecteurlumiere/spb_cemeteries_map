@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="ru">
   <head>
-    <title>Карта кладбищ СПб</title>
+    <% content_tag "title" do %>
+      Карта кладбищ СПб<%= " | #{yield_content(:title)}" if yield_content(:title)  %>
+    <% end %>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= stylesheet_link_tag "site", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
