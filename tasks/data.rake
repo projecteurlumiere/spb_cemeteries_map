@@ -22,6 +22,7 @@ namespace :data do
 
       File.write("#{output_path}/#{row["path"]}.yml", YAML.dump(row))
       parsed_entries << row["path"]
+      i += 1
     end
 
     File.write("#{output_path}/catalogue.yml", YAML.dump(parsed_entries))
