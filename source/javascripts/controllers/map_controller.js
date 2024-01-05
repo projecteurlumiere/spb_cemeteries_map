@@ -18,14 +18,18 @@ export default class extends Controller {
   }
 
   drawPolygon(e) {
-    let coordinates = e.detail.coordinatesType === "geojson" ? e.detail.coordinates : JSON.parse(e.detail.coordinates);
+    if (this.figures[e.detail.id] != undefined) return
 
-    let figure = this.#figureByType(e.detail.coordinatesType, coordinates);
+    let coordinates = JSON.parse(e.detail.coordinates);
+
+    let figure = L.geoJSON(coordinates, {
+      onEachFeature: (feature, layer) => {
+        layer.on("click", () => { this.#turboVisitEntry(e) })
+      }
+    })
 
     figure.addTo(this.map);
 
-    figure.getElement().dataset.action = "click->map#toEntry";
-    figure.getElement().dataset.mapIdParam = e.detail.id;
     this.figures[e.detail.id] = figure;
   }
 
@@ -35,7 +39,20 @@ export default class extends Controller {
 
     this.sidebar.enablePanel("entry");
     this.sidebar.open("entry");
-    this.#centerMap(figure);
+
+    if (e.type === "catalogue:initialEntryFound") {
+      this.map.setView(figure.getBounds().getCenter(), 14)
+    } else {
+      this.map.flyTo(figure.getBounds().getCenter(), 14);
+    }
+  }
+
+  #turboVisitEntry(e){
+    Turbo.visit(e.detail.path, {
+      frame: "entry-content"
+    })
+    window.history.pushState(history.state, "", e.detail.path)
+    this.toEntry(e);
   }
 
   #setMap(){
@@ -54,37 +71,5 @@ export default class extends Controller {
       closeButton: true,    // whether t add a close button to the panes
       position: "left",     // left or right
     }).addTo(this.map);
-  }
-
-  #figureByType(type, coordinates) {
-    switch (type) {
-      case "marker": {
-        return L.marker(coordinates)
-      }
-      case "polygon": {
-        return L.polygon(coordinates)
-      }
-      case "geojson":{
-        return L.geoJSON(coordinates)
-      }
-      default: {
-        console.log("no figure to draw");
-        return
-      }
-    }
-  }
-
-  #centerMap(figure) {
-    switch (true) {
-      case figure instanceof L.Marker:
-        this.map.flyTo(figure.getLatLng(), 14);
-        break;
-      case figure instanceof L.Polygon:
-        this.map.flyTo(figure.getCenter(), 14);
-        break
-      case figure instanceof L.GeoJSON:
-        this.map.flyTo(figure.getBounds().getCenter(), 14);
-        break
-    }
   }
 }
