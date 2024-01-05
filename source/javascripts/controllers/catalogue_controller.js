@@ -12,10 +12,10 @@ export default class extends Controller {
   connect() {
     this.path = this.#preparePath();
 
-    this.#dispatchEntryData();
+    this.#processEntryData();
 
     if (typeof this.initialEntryId != "undefined") {
-      this.dispatch("finish", { detail: {
+      this.dispatch("initialEntryFound", { detail: {
         id: this.initialEntryId,
       }});
     }
@@ -29,14 +29,14 @@ export default class extends Controller {
     return path[lastSymbolIndex] === "/" ? path.substring(0, lastSymbolIndex) : path
   }
 
-  #dispatchEntryData(){
+  #processEntryData(){
     this.cemeteryTargets.forEach(e => {
       e = e.dataset;
 
       this.dispatch("process", { detail: {
         id: e.id,
+        path: e.path,
         coordinates: e.coordinates,
-        coordinatesType: e.coordinatesType
       }});
 
       if (this.path === e.path) this.initialEntryId = e.id;
