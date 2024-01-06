@@ -1,5 +1,4 @@
 import "turbo"
-import "fslightbox"
 
 import CatalogueController from "catalogue"
 import GalleryController from "gallery"

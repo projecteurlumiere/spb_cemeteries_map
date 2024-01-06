@@ -1,7 +1,9 @@
 imports:
   "turbo": ./javascripts/vendor/turbo.es2017-esm.js
   "stimulus": ./javascripts/vendor/stimulus.js
-  "fslightbox": ./javascripts/vendor/fslightbox.js
+  "photoswipe": ./javascripts/vendor/photoswipe.esm.js
+  "photoswipe-lightbox": ./javascripts/vendor/photoswipe-lightbox.esm.js
+  # photoswipe's sourcemaps are downloaded automatically
   "leaflet": ./javascripts/vendor/leaflet.js
   "leaflet-sidebar-v2": ./javascripts/vendor/leaflet-sidebar-v2.js
   "catalogue": ./javascripts/controllers/catalogue_controller.js
