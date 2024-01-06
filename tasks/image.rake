@@ -3,6 +3,7 @@ require "yaml"
 require "image_size"
 
 namespace :image do
+  desc "downloads images for every entry's geometry from pastvu into images/vendor/:path_name"
   task :load do
     dir = "data/"
     Dir.entries(dir).select do |file|
@@ -37,11 +38,13 @@ namespace :image do
     puts "images loaded"
   end
 
+  desc "calls image:clean & image:load"
   task :reload do
     Rake::Task["image:clean"].execute
     Rake::Task["image:load"].execute
   end
 
+  desc "rm rf images/vendor completely & removes photos from data yml files"
   task :clean do
     dir = "data/"
     Dir.entries(dir).select do |file|
@@ -56,6 +59,6 @@ namespace :image do
 
     vendor_dir = "source/images/vendor/*"
     FileUtils.rm_rf(Dir.glob(vendor_dir))
+    puts "images removed"
   end
-  puts "images removed"
 end
