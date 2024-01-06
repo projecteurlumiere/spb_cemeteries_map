@@ -1,5 +1,6 @@
 require "pastvu"
 require "yaml"
+require "image_size"
 
 namespace :image do
   task :load do
@@ -21,10 +22,14 @@ namespace :image do
       output_dir = "source/images/vendor/#{entry["path"]}/"
       Dir.mkdir(output_dir)
       collection.each_with_index do |p, i|
-        p.download(:original, output_dir + "#{p.cid}_original.jpg")
+        original = p.download(:original, output_dir + "#{p.cid}_original.jpg")
         p.download(:standard, output_dir + "#{p.cid}_standard.jpg")
         p.download(:thumb, output_dir + "#{p.cid}_thumb.jpg")
-        entry["photos"] << p.to_hash
+        photo_hash = p.to_hash
+        dimensions = ImageSize.new(original)
+
+        photo_hash["height"], photo_hash["width"] = dimensions.height, dimensions.width
+        entry["photos"] << photo_hash
       end
 
       File.write(dir + file, YAML.dump(entry))

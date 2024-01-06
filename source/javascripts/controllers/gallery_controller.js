@@ -1,12 +1,16 @@
 import { Controller } from "stimulus"
+import PhotoSwipeLightbox from "photoswipe-lightbox";
+import PhotoSwipe from "photoswipe";
 
 export default class extends Controller {
 
   connect() {
-    refreshFsLightbox();
-    let link = document.querySelector(".lightbox-opener");
-    if (link) {
-      link.onclick = () => { fsLightbox.open() }
-    }
+    const lightbox = new PhotoSwipeLightbox({
+      gallery: "#gallery",
+      children: "a",
+      pswpModule: () => PhotoSwipe
+    });
+
+    lightbox.init();
   }
 }

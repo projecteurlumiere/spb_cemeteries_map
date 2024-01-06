@@ -32,6 +32,7 @@ GEM
     hashie (3.6.0)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
+    image_size (3.3.0)
     kramdown (2.4.0)
       rexml
     listen (3.8.0)
@@ -109,6 +110,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  image_size (~> 3.0)
   middleman (~> 4.2)
   middleman-autoprefixer (~> 3.0)
   middleman-importmap

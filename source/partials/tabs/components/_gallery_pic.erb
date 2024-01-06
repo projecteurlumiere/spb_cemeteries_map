@@ -1,10 +1,25 @@
+<% link = "images/vendor/#{cemetery.path}/" %>
+<% original_path = link + "#{photo.cid}_original.jpg" %>
+<% thumb_path = link + "#{photo.cid}_thumb.jpg" %>
+
 <li>
-  <%= link_to photo.link, data: { fslightbox: 'gallery', 
-  class: "gallery-pic-full" } do %>
-    <% if index < 5 %>
-      <%= image_tag photo.thumb_link, data: { class: "gallery-pic-thumb"} %>
-    <% elsif index == 5 %>
-      <%= link_to "Ещё #{@photos.count - 5} фото", "", { class: "gallery-n-more-link lightbox-opener" } %>
+  <% if index < 5 %>
+    <% link_to original_path, data: { pswp_width: photo.width, pswp_height: photo.height, cropped: true } do %>
+      <%= image_tag original_path,
+                    data: {
+                    fslightbox: 'gallery',
+                    class: "gallery-pic-full" } %>
     <% end %>
+  <% elsif index == 5 %>
+    <%= link_to "Ещё #{cemetery.photos.count - 5} фото",
+                original_path, {
+                  class: "gallery-n-more-link lightbox-opener" },
+                  data: {
+                    pswp_width: photo.width,
+                    pswp_height: photo.height,
+                    cropped: true
+                  } %>
+  <% else %>
+    <%= link_to "", original_path, data: { pswp_width: photo.width, pswp_height: photo.height, cropped: true } %>
   <% end %>
 </li>
