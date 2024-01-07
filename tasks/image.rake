@@ -74,6 +74,10 @@ def iterate_dir(dir, skip_update_if: nil, skip_update_if_no_incoming_photos: tru
 
     after_download_do&.call output_dir, entry, collection
 
+    entry["photos"] = entry["photos"].sort_by do |photo|
+      photo["year"]
+    end
+
     File.write(datafile_path, YAML.dump(entry))
   end
 end
