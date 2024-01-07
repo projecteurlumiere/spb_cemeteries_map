@@ -4,6 +4,7 @@ imports:
   "photoswipe": ./javascripts/vendor/photoswipe.esm.js
   "photoswipe-lightbox": ./javascripts/vendor/photoswipe-lightbox.esm.js
   # photoswipe's sourcemaps are downloaded automatically
+  "photoswipe-dynamic-caption": ./javascripts/vendor/photoswipe-dynamic-caption-plugin.esm.js
   "leaflet": ./javascripts/vendor/leaflet.js
   "leaflet-sidebar-v2": ./javascripts/vendor/leaflet-sidebar-v2.js
   "catalogue": ./javascripts/controllers/catalogue_controller.js

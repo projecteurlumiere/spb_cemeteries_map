@@ -1,0 +1,17 @@
+<% default_photo_attributes = {
+  data: {
+    pswp_width: photo.width,
+    pswp_height: photo.height,
+    cropped: true
+    }
+  } %>
+<% photo_attributes = custom_attributes&.reverse_merge(default_photo_attributes) || default_photo_attributes %>
+
+<% link_to original_path, photo_attributes do %>
+  <%= custom_placeholder || image_tag(original_path) %>
+  <span class="pswp-caption-content">
+    <span class="years"><%= photo.year == photo.year2 ? photo.year : "#{photo.year}-#{photo.year2}" %></span>
+    <br>
+    <span class="description"><%= photo.title %></span>
+  </span>
+<% end %>
