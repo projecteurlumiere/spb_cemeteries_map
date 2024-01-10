@@ -10,3 +10,4 @@ gem "wdm", "~> 0.1", platforms: [:mswin, :mingw, :x64_mingw]
 gem "image_size", "~> 3.0"
 gem "middleman-importmap"
 gem "rake"
+gem "rubyXL", "~> 3.4", require: false

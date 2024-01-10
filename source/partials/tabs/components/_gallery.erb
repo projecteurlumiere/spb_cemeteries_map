@@ -3,7 +3,7 @@
   <a href="" class="gallery-n-more-link-top lightbox-opener">Смотреть все (CКОЛЬКО?) фото</a>
 
   <% content_tag "ul", id: "gallery", data: { controller: "gallery" } do %>
-    <% cemetery.photos.each_with_index do |photo, index| %>
+    <% cemetery.photos&.each_with_index do |photo, index| %>
       <%= partial "partials/tabs/components/gallery_pic", locals: { cemetery: cemetery, photo: photo, index: index } %>
     <% end %>
 

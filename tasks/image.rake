@@ -83,7 +83,7 @@ def iterate_dir(dir, skip_update_if: nil, skip_update_if_no_incoming_photos: tru
 end
 
 def invalid_entry_name?(name)
-  name.start_with?("sample_", "catalogue") || !name.end_with?(".yml")
+  name.start_with?("sample_", "catalogue", ".keep") || !name.end_with?(".yml")
 end
 
 def parse_yml(file_path)
