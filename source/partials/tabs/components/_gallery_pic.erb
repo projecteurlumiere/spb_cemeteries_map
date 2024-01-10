@@ -1,25 +1,17 @@
-<% link = "images/vendor/#{cemetery.path}/" %>
-<% original_path = link + "#{photo.cid}_original.jpg" %>
-<% locals = {
-  photo:              photo,
-  original_path:      original_path,
-  custom_placeholder: nil,
-  custom_attributes:  nil
-} %>
-<% custom_locals = nil %>
+<% default_photo_attributes = {
+  data: {
+    pswp_width: photo.width,
+    pswp_height: photo.height,
+    cropped: true
+    }
+  } %>
+<% photo_attributes = custom_attributes&.reverse_merge(default_photo_attributes) || default_photo_attributes %>
 
-
-<li>
-  <% if index == 5 %>
-    <% custom_locals = {
-      custom_placeholder: "Ещё #{cemetery.photos.count - 5} фото",
-      custom_attributes: { class: "gallery-n-more-link lightbox-opener" }
-    } %>
-  <% elsif index > 5 %>
-     <% custom_locals = {
-      custom_placeholder: ""
-     } %>
-  <% end %>
-
-  <%= partial "partials/tabs/components/gallery_pic2", locals: custom_locals&.reverse_merge(locals) || locals %>
-</li>
+<% link_to original_path, photo_attributes do %>
+  <%= custom_placeholder || image_tag(original_path) %>
+  <span class="pswp-caption-content">
+    <span class="years"><%= photo.year == photo.year2 ? photo.year : "#{photo.year}-#{photo.year2}" %></span>
+    <br>
+    <span class="description"><%= photo.title %></span>
+  </span>
+<% end %>
