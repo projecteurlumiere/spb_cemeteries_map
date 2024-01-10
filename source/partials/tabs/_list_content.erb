@@ -3,7 +3,10 @@
   <% data.catalogue.each do |cemetery_name| %>
     <% cemetery = data.send(cemetery_name) %>
     <li>
-      <%# image_tag cemetery.main_thumb_pic_link, class: "list-entry-pic" %>
+      <% if cemetery.photos&.any? %>
+        <%= image_tag photo_path(cemetery, cemetery.photos[0], :thumb), class: "list-entry-pic" %>
+      <% end %>
+
       <%= link_to cemetery.name, cemetery.path, class: 'cemetery-preview',
         data: {
           turbo_frame: "entry-content",

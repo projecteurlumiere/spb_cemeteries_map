@@ -18,9 +18,16 @@ ready do
 end
 
 helpers do
-  def locals_for_gallery_pic(cemetery, photo, index)
+  def photo_path(cemetery, photo, size = :original)
+    allowed_sizes = %i[original standard thumb]
+    raise "size should be in #{allowed_sizes}" unless allowed_sizes.include?(size)
     link = "images/vendor/#{cemetery.path}/"
-    original_path = link + "#{photo.cid}_original.jpg"
+    link + "#{photo.cid}_" + size.to_s + ".jpg"
+  end
+
+  def locals_for_gallery_pic(cemetery, photo, index)
+    original_path = photo_path(cemetery, photo)
+
     basic_locals = {
       photo:              photo,
       original_path:      original_path,
