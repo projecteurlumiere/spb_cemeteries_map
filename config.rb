@@ -21,6 +21,7 @@ helpers do
   def photo_path(cemetery, photo, size = :original)
     allowed_sizes = %i[original standard thumb]
     raise "size should be in #{allowed_sizes}" unless allowed_sizes.include?(size)
+
     link = "images/vendor/#{cemetery.path}/"
     link + "#{photo.cid}_" + size.to_s + ".jpg"
   end
