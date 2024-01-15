@@ -9,6 +9,6 @@ gem "wdm", "~> 0.1", platforms: [:mswin, :mingw, :x64_mingw]
 
 gem "image_size", "~> 3.0"
 gem "middleman-importmap"
-gem "pastvu", "~> 1.0.0", require: false
+gem "pastvu", require: false
 gem "rake"
 gem "rubyXL", "~> 3.4", require: false
