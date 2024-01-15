@@ -81,13 +81,17 @@ def modify_row!(hashed_row, line)
 end
 
 def write_data_yml(output_path, hashed_row, parsed_entries)
-
   File.write("#{output_path}/#{hashed_row["path"]}.yml", YAML.dump(hashed_row))
-  parsed_entries << hashed_row["path"]
+  parsed_entries << { hashed_row["path"] => hashed_row["name"] }
   parsed_entries
 end
 
 def write_catalogue_yml(output_path, parsed_entries)
+  parsed_entries
+    .sort_by! { |e| e.values[0] }
+    .map! { |e| e.keys }
+    .flatten!
+
   File.write("#{output_path}/catalogue.yml", YAML.dump(parsed_entries))
 end
 
