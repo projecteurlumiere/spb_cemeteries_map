@@ -10,3 +10,4 @@ imports:
   "catalogue": ./javascripts/controllers/catalogue_controller.js
   "gallery": ./javascripts/controllers/gallery_controller.js
   "map": ./javascripts/controllers/map_controller.js
+  "filter": ./javascripts/controllers/filter_controller.js

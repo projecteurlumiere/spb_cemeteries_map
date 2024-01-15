@@ -19,11 +19,18 @@ export default class extends Controller {
 
   drawPolygon(e) {
     if (this.figures[e.detail.id] != undefined) return
+    console.log(`drawing ${e.detail.path}`);
 
     let coordinates = JSON.parse(e.detail.coordinates);
 
     let figure = L.geoJSON(coordinates, {
       onEachFeature: (feature, layer) => {
+        // debugger
+        layer.setStyle({
+          className: `layer ${e.detail.type.toLowerCase()}`,
+          // color,
+          // stroke,
+        });
         layer.on("click", () => { this.#turboVisitEntry(e) })
       }
     })

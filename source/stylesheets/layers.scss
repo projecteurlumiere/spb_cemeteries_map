@@ -1,0 +1,25 @@
+.layer {
+  // must correspond (with respective formatting) to buttons in _list_content.erb
+  &.действующее {
+    fill: lightskyblue;
+    stroke: blue;
+  }
+
+  &.воинское {
+    fill: coral;
+    stroke: red;
+  }
+  &.утраченное {
+    fill: whitesmoke;
+    stroke: lightslategray;
+  }
+
+  &.музейное {
+    fill: yellowgreen;
+    stroke: salmon
+  }
+
+  &.hidden {
+    display: none;
+  }
+}

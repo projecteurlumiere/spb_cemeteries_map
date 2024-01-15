@@ -1,0 +1,21 @@
+<div class="filter" data-controller="filter">
+  <% attributes = { action: "click->filter#toggleType" } %>
+
+  <%# must correspond (with respective formatting) to css classes in layers.css %>
+  <% content_tag :button, data: attributes.merge({ action: "click->filter#toggleAll" }) do %>
+    Всё
+  <% end %>
+  <% content_tag :button, data: attributes.merge({ filter_class_param: ".layer.утраченное" }) do %>
+    Утраченные
+  <% end %>
+  <% content_tag :button, data: attributes.merge({ filter_class_param: ".layer.действующее" }) do %>
+    Действующие
+  <% end %>
+  <% content_tag :button, data: attributes.merge({ filter_class_param: ".layer.воинское" }) do %>
+    Воинские
+  <% end %>
+  <% content_tag :button, data: attributes.merge({ filter_class_param: ".layer.музейное" }) do %>
+    Музейные
+  <% end %>
+  <%# <button data-action="click->filter#showLayers">Церковные</button> %>
+</div>

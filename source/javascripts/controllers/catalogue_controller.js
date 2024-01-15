@@ -36,6 +36,7 @@ export default class extends Controller {
       this.dispatch("process", { detail: {
         id: e.id,
         path: e.path,
+        type: e.type,
         coordinates: e.coordinates,
       }});
 

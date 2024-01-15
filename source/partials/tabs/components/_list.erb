@@ -1,0 +1,24 @@
+<ul id="cemetery-list" data-controller="catalogue">
+  <% data.catalogue.each do |cemetery_name| %>
+    <% cemetery = data.send(cemetery_name) %>
+    <li>
+      <% if cemetery.photos&.any? %>
+        <%= image_tag photo_path(cemetery, cemetery.photos[0], :thumb), class: "list-entry-pic" %>
+      <% end %>
+
+      <%= link_to cemetery.name, cemetery.path, class: 'cemetery-preview',
+        data: {
+          turbo_frame: "entry-content",
+          turbo_action: "advance",
+          catalogue_target: "cemetery",
+          action: "click->map#toEntry",
+          map_id_param: cemetery.id,
+          id: cemetery.id,
+          path: cemetery.path,
+          type: cemetery.type,
+          status: cemetery.status,
+          coordinates: cemetery.coordinates,
+         } %>
+    </li>
+  <% end %>
+</ul>
