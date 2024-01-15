@@ -1,0 +1,12 @@
+<div class="address">
+  <% unless cemetery.address.to_s.empty? %>
+    <p class="primary">
+      <%= cemetery.address %>
+    </p>
+  <% end %>
+  <% unless cemetery.address_specify.to_s.empty? %>
+    <p class="specify">
+      <%= cemetery.address_specify %>
+    </p>
+  <% end %>
+</div>

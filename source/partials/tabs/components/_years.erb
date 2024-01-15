@@ -1,6 +1,10 @@
 <div class="years">
-  <p>Год открытия: <%= cemetery.open %></p>
-  <% if cemetery.close %>
-    <p>Год закрытия: <%= cemetery.close %></p>
+
+  <% unless cemetery.y_open.to_s.empty? %>
+    <p>Год открытия: <%= cemetery.y_open %></p>
+  <% end %>
+
+  <% if cemetery.y_close.to_s.empty? %>
+    <p>Год закрытия: <%= cemetery.y_close %></p>
   <% end %>
 </div>

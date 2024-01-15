@@ -1,12 +1,24 @@
+<% locals = { locals: { cemetery: cemetery } } %>
+
 <h2><%= cemetery.name %></h2>
 
-<%= partial "partials/tabs/components/years", locals: { cemetery: cemetery } %>
+<% unless cemetery.address.to_s.empty? && cemetery.address_specify.to_s.empty? %>
+  <%= partial "partials/tabs/components/address", locals %>
+<% end %>
 
-<%= partial "partials/tabs/components/gallery", locals: { cemetery: cemetery } %>
+<% unless cemetery.y_open.to_s.empty? && cemetery.y_close.to_s.empty? %>
+  <%= partial "partials/tabs/components/years", locals %>
+<% end %>
 
-<%= partial "partials/tabs/components/description", locals: { cemetery: cemetery } %>
+<% if cemetery.photos&.any?  %>
+  <%= partial "partials/tabs/components/gallery", locals %>
+<% end %>
 
-<%# partial "partials/tabs/components/notable_individuals", locals: { cemetery: cemetery } %>
+<% unless cemetery.description.to_s.empty? %>
+  <%= partial "partials/tabs/components/description", locals %>
+<% end %>
 
-<%# partial "partials/tabs/components/sources", locals: { cemetery: cemetery }  %>
+<%# partial "partials/tabs/components/notable_individuals", locals %>
+
+<%# partial "partials/tabs/components/sources", locals  %>
 
