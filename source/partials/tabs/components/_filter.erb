@@ -2,23 +2,23 @@
   <% attributes = { action: "click->filter#toggle", filter_target: "button" } %>
 
   <%# must correspond (with respective formatting) to css classes in layers.css %>
-  <%# content_tag :button, data: attributes.merge({ action: "click->filter#toggleAll", filter_target: "" }) do %>
-    <%# Всё %>
-  <%# end %>
+  <% content_tag :button, data: attributes.merge({ action: "click->filter#toggleAll", filter_target: "" }) do %>
+    <%= "Все" %>
+  <% end %>
   <% content_tag :button, class: "select",
                           data: attributes.merge({
                               action: "click->filter#toggle",
-                              filter_selector_param: ".layer.утраченное",
+                              filter_selector_param: ".утраченное",
                               filter_target: "button" }) do %>
     Утраченные
   <% end %>
-  <% content_tag :button, data: attributes.merge({ filter_selector_param: ".layer.действующее" }) do %>
+  <% content_tag :button, data: attributes.merge({ filter_selector_param: ".действующее" }) do %>
     Действующие
   <% end %>
-  <% content_tag :button, data: attributes.merge({ filter_selector_param: ".layer.воинское" }) do %>
+  <% content_tag :button, data: attributes.merge({ filter_selector_param: ".воинское" }) do %>
     Воинские
   <% end %>
-  <% content_tag :button, data: attributes.merge({ filter_selector_param: ".layer.музейное" }) do %>
+  <% content_tag :button, data: attributes.merge({ filter_selector_param: ".музейное" }) do %>
     Музейные
   <% end %>
   <%# <button data-action="click->filter#showLayers">Церковные</button> %>

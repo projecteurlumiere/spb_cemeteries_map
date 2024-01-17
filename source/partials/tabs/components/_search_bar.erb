@@ -1,0 +1,6 @@
+<%= text_field_tag :search, placeholder: "🔎 Найти кладбище",
+                            autocomplete: "off",
+                            data: {
+                              controller: "filter",
+                              action: "input->filter#search"
+                            } %>
