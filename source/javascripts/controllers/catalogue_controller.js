@@ -30,6 +30,8 @@ export default class extends Controller {
   }
 
   #processEntryData(){
+    let length = this.cemeteryTargets.length
+    let i = 1
     this.cemeteryTargets.forEach(e => {
       e = e.dataset;
 
@@ -37,10 +39,13 @@ export default class extends Controller {
         id: e.id,
         path: e.path,
         type: e.type,
+        last: i === length ? true : false,
         coordinates: e.coordinates,
       }});
 
       if (this.path === e.path) this.initialEntryId = e.id;
+
+      i++
     });
   }
 }

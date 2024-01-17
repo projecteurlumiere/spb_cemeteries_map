@@ -5,43 +5,76 @@ export default class extends Controller {
     filtered: Boolean
   }
 
-  connect() {
-    let nodes = document.querySelectorAll(".layer");
+  static targets = [
+    "button",
+    "initial" // button
+  ]
 
-    nodes.forEach(e => {
-      if (Array.from(e.classList).includes("hidden")) {
-        this.filteredValue = true
+  prepare() {
+    this.buttonTargets.forEach(button => {
+      let layers = document.querySelectorAll(button.dataset.filterSelectorParam);
+
+      if (Array.from(button.classList).includes("select")) {
+        this.filteredValue = true;
+        layers.forEach(layer => {
+          layer.classList.remove("hidden");
+        })
+      } else {
+        layers.forEach(layer => {
+          layer.classList.add("hidden");
+        })
+      }
+    });
+  }
+
+  toggle(event) {
+    let layers = document.querySelectorAll(event.params.selector);
+    let enabled;
+
+    layers.forEach(layer => {
+      enabled = !layer.classList.toggle("hidden");
+    })
+
+    if (enabled) {
+      event.target.classList.add("select")
+   } else {
+      event.target.classList.remove("select")
+    }
+
+    this.#setFilteredValue();
+  };
+
+  toggleAll(){
+    let layers = document.querySelectorAll(".layer");
+
+    if (this.filteredValue === true) {
+      layers.forEach(layer => {
+        layer.classList.remove("hidden");
+        this.filteredValue = false;
+
+        this.buttonTargets.forEach(button => {
+          button.classList.remove("select");
+        });
+      });
+    } else {
+      layers.forEach(layer => {
+        layer.classList.add("hidden");
+        this.filteredValue = true;
+
+        this.buttonTargets.forEach(button => {
+          button.classList.add("select");
+        });
+      });
+    }
+  }
+
+  #setFilteredValue() {
+    this.buttonTargets.forEach(button => {
+      if (button.classlist.includes("select")) {
+        this.filteredValue = true;
         return
       }
     });
-
     this.filteredValue = false
-  }
-
-  toggleType(e) {
-    console.log("toggle called");
-    let nodes = document.querySelectorAll(e.params.class);
-
-    nodes.forEach(e => {
-      e.classList.toggle("hidden");
-      if (Array.from(e.classList).includes("hidden")) this.filteredValue = true
-    });
-  }
-
-  toggleAll(){
-    console.log("toggle all called");
-    let nodes = document.querySelectorAll(".layer");
-
-    if (this.filteredValue === true) {
-      nodes.forEach(e => {
-        e.classList.remove("hidden");
-        this.filteredValue = false
-      });
-    } else {
-      nodes.forEach(e => {
-        e.classList.add("hidden");
-        this.filteredValue = true
-      });
-    }
   }
 }

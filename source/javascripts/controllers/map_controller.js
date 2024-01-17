@@ -18,26 +18,31 @@ export default class extends Controller {
   }
 
   drawPolygon(e) {
-    if (this.figures[e.detail.id] != undefined) return
-    console.log(`drawing ${e.detail.path}`);
+    try {
+      if (this.figures[e.detail.id] != undefined) return
+      console.log(`drawing ${e.detail.path}`);
 
-    let coordinates = JSON.parse(e.detail.coordinates);
+      let coordinates = JSON.parse(e.detail.coordinates);
 
-    let figure = L.geoJSON(coordinates, {
-      onEachFeature: (feature, layer) => {
-        // debugger
-        layer.setStyle({
-          className: `layer ${e.detail.type.toLowerCase()}`,
-          // color,
-          // stroke,
-        });
-        layer.on("click", () => { this.#turboVisitEntry(e) })
-      }
-    })
+      let figure = L.geoJSON(coordinates, {
+        onEachFeature: (feature, layer) => {
+          layer.setStyle({
+            className: `layer ${e.detail.type.toLowerCase()} hidden`,
+            // color,
+            // stroke,
+          });
+          layer.on("click", () => { this.#turboVisitEntry(e) })
+        }
+      })
 
-    figure.addTo(this.map);
+      figure.addTo(this.map);
 
-    this.figures[e.detail.id] = figure;
+      this.figures[e.detail.id] = figure;
+    }
+    finally {
+      console.log("finally block is here");
+      if (e.detail.last) { console.log("last!"); this.dispatch("finishDrawing") }
+    }
   }
 
   toEntry(e) {
