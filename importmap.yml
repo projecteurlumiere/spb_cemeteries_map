@@ -11,3 +11,4 @@ imports:
   "gallery": ./javascripts/controllers/gallery_controller.js
   "map": ./javascripts/controllers/map_controller.js
   "filter": ./javascripts/controllers/filter_controller.js
+  "search": ./javascripts/controllers/search_controller.js

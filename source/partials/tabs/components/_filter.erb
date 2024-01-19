@@ -1,4 +1,10 @@
-<div class="filter" data-controller="filter" data-action="map:finishDrawing@window->filter#prepare" data-filter-filtered-value="true">
+<% content_tag "div", class: "filter",
+                      data: {
+                      controller: "filter",
+                      action: "map:finishDrawing@window->filter#prepare search:input@window->filter#showAll",
+                      filter_filtered_value: "",
+                      filter_search_outlet: ".search"
+                    } do %>
   <% attributes = { action: "click->filter#toggle", filter_target: "button" } %>
 
   <%# must correspond (with respective formatting) to css classes in layers.css %>
@@ -21,5 +27,4 @@
   <% content_tag :button, data: attributes.merge({ filter_selector_param: ".музейное" }) do %>
     Музейные
   <% end %>
-  <%# <button data-action="click->filter#showLayers">Церковные</button> %>
-</div>
+<% end %>

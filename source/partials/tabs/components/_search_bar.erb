@@ -1,6 +1,9 @@
-<%= text_field_tag :search, placeholder: "🔎 Найти кладбище",
-                            autocomplete: "off",
-                            data: {
-                              controller: "filter",
-                              action: "input->filter#search"
-                            } %>
+<div class="search" data-controller="search" data-action="filter:input@window->search#clear" data-search-searching-value="false">
+  <%= text_field_tag :search, placeholder: "🔎 Найти кладбище",
+                              autocomplete: "off",
+                              data: {
+                                action: "input->search#dispatchInput input->search#filter",
+                                search_target: "input"
+                              } %>
+  <button class="clear hidden" data-action="input->search#dispatchInput click->search#clear" data-search-target="clear" data-search-filter-param="true">X</button>
+</div>

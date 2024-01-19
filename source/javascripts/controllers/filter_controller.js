@@ -9,19 +9,9 @@ export default class extends Controller {
     "button"
   ]
 
-  search(event){
-    let searchInput = event.target.value.trim().toLowerCase();
-
-    Array.from(document.querySelectorAll(".preview")).forEach(preview => {
-      let previewText = preview.innerText.trim().toLowerCase();
-
-      if ((searchInput === "") || (previewText.includes(searchInput))) {
-        preview.classList.remove("hidden");
-      } else {
-        preview.classList.add("hidden");
-      }
-    })
-  }
+  static outlets = [
+    "search"
+  ]
 
   // shows on the map and in the list the types which buttons have .selected class
   prepare() {
@@ -31,7 +21,6 @@ export default class extends Controller {
       let enabled;
 
       if (Array.from(button.classList).includes("select")) {
-        this.filteredValue = true;
         layers.forEach(layer => {
           layer.classList.remove("hidden");
         })
@@ -49,6 +38,8 @@ export default class extends Controller {
   }
 
   toggle(event) {
+    this.dispatch("input");
+
     let layers = document.querySelectorAll(".layer" + event.params.selector);
     let enabled;
 
@@ -63,33 +54,21 @@ export default class extends Controller {
     }
 
     this.#setFilteredValue();
-    this.#filterPreviews(enabled, event.params.selector)
-  };
+    this.#filterPreviews(enabled, event.params.selector);
+  }
 
   toggleAll(){
-    let layers = document.querySelectorAll(".layer");
+    let wasSearching = this.searchOutlet.searchingValue;
     let enabled;
 
-    if (this.filteredValue === true) {
-      layers.forEach(layer => {
-        layer.classList.add("hidden");
-        this.filteredValue = false;
+    this.dispatch("input");
 
-        this.buttonTargets.forEach(button => {
-          button.classList.remove("select");
-        });
-      });
-      enabled = false
+    if (this.filteredValue === false && !wasSearching) {
+      this.#hide();
+      enabled = false;
     } else {
-      layers.forEach(layer => {
-        layer.classList.remove("hidden");
-        this.filteredValue = true;
-
-        this.buttonTargets.forEach(button => {
-          button.classList.add("select");
-        });
-      });
-      enabled = true
+      this.#show();
+      enabled = true;
     }
 
     this.buttonTargets.forEach(button => {
@@ -98,9 +77,12 @@ export default class extends Controller {
     })
   }
 
+  showAll() {
+    this.#show();
+  }
+
   #filterPreviews(selected, selector) {
     let previews = document.querySelectorAll(".preview" + selector)
-    debugger
 
     if (selected) {
       previews.forEach(preview => {
@@ -114,12 +96,39 @@ export default class extends Controller {
   }
 
   #setFilteredValue() {
-    this.buttonTargets.forEach(button => {
-      if (Array.from(button.classList).includes("select")) {
+    for (let i in this.buttonTargets) {
+      let button = this.buttonTargets[i];
+
+      if (!Array.from(button.classList).includes("select")) {
         this.filteredValue = true;
         return
       }
+    }
+    this.filteredValue = false
+  }
+
+
+  #show(layers = document.querySelectorAll(".layer")) {
+    console.log("im called");
+
+    layers.forEach(layer => {
+      layer.classList.remove("hidden");
+
+      this.buttonTargets.forEach(button => {
+        button.classList.add("select");
+      });
     });
     this.filteredValue = false
+  }
+
+  #hide(layers = document.querySelectorAll(".layer")) {
+    layers.forEach(layer => {
+      layer.classList.add("hidden");
+
+      this.buttonTargets.forEach(button => {
+        button.classList.remove("select");
+      });
+    });
+    this.filteredValue = true
   }
 }

@@ -2,6 +2,10 @@
 
 <h2><%= cemetery.name %></h2>
 
+<% unless cemetery.type.to_s.empty? %>
+  <%= partial "partials/tabs/components/type", locals %>
+<% end %>
+
 <% unless cemetery.address.to_s.empty? && cemetery.address_specify.to_s.empty? %>
   <%= partial "partials/tabs/components/address", locals %>
 <% end %>
