@@ -1,7 +1,7 @@
 <% content_tag "div", class: "filter",
                       data: {
                       controller: "filter",
-                      action: "map:finishDrawing@window->filter#prepare search:input@window->filter#showAll",
+                      action: "map:finishDrawing@window->filter#prepare search:input@window->filter#showAll catalogue:initialEntryFound@window->filter#showAll",
                       filter_filtered_value: "",
                       filter_search_outlet: ".search"
                     } do %>
