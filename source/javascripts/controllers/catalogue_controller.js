@@ -37,6 +37,7 @@ export default class extends Controller {
 
       this.dispatch("process", { detail: {
         id: e.id,
+        name: e.name,
         path: e.path,
         type: e.type,
         last: i === length ? true : false,

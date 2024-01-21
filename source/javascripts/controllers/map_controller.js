@@ -32,6 +32,9 @@ export default class extends Controller {
             // stroke,
           });
           layer.on("click", () => { this.#turboVisitEntry(e) })
+          layer.bindTooltip(e.detail.name, {
+            sticky: true,
+          })
         }
       })
 
