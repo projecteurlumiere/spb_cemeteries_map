@@ -6,19 +6,7 @@
     <% end %>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= stylesheet_link_tag "site", "data-turbo-track": "reload" %>
-
-    <%#TODO pull request to middleman-importmap to make the following tag work: %>
-    <%# javascript_importmap_tags %>
-
-    <script
-      async
-      data-turbo-track="reload"
-      src="javascripts/vendor/es-module-shims.js"
-      crossorigin="anonymous"
-    ></script>
-    <%= javascript_inline_importmap_tag %>
-    <%= javascript_inline_module_tag("site") %>
-
+    <%= javascript_importmap_tags(shim_src: "javascripts/vendor/es-module-shims.js") %>
   </head>
   <body>
     <%= yield %>

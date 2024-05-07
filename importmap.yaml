@@ -1,0 +1,14 @@
+imports:
+  "turbo": ./javascripts/vendor/turbo.es2017-esm.js
+  "stimulus": ./javascripts/vendor/stimulus.js
+  "photoswipe": ./javascripts/vendor/photoswipe.esm.js
+  "photoswipe-lightbox": ./javascripts/vendor/photoswipe-lightbox.esm.js
+  # photoswipe's sourcemaps are downloaded automatically
+  "photoswipe-dynamic-caption": ./javascripts/vendor/photoswipe-dynamic-caption-plugin.esm.js
+  "leaflet": ./javascripts/vendor/leaflet.js
+  "leaflet-sidebar-v2": ./javascripts/vendor/leaflet-sidebar-v2.js
+  "catalogue": ./javascripts/controllers/catalogue_controller.js
+  "gallery": ./javascripts/controllers/gallery_controller.js
+  "map": ./javascripts/controllers/map_controller.js
+  "filter": ./javascripts/controllers/filter_controller.js
+  "search": ./javascripts/controllers/search_controller.js

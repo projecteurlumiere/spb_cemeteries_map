@@ -43,7 +43,6 @@ export default class extends Controller {
       this.figures[e.detail.id] = figure;
     }
     finally {
-      console.log("finally block is here");
       if (e.detail.last) { console.log("last!"); this.dispatch("finishDrawing") }
     }
   }
