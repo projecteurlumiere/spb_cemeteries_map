@@ -1,13 +1,12 @@
 # Summary
-This repository contains a static website generator for an interactive map of active and lost cemeteries in St. Petersburg. 
+This repository contains a static website generator featuring an interactive map of active and lost cemeteries in St. Petersburg. 
 It is being worked on in collaboration with [whatiscemetery](https://whatiscemetery.com/) project.
 
 The data is going to be eventually published elsewhere.
 
 ## How it works
 
-- The website builds from a spreadsheet (csv/xlsx), 
-which transforms data into Middleman's data yml files containing information and geographic coordinates.
+- The website is generated from a spreadsheet (csv/xlsx) which contains geographic coordinates and trivia.
 - The build step also fetches vintage photos belonging to geographic boundaries of each cemetery
  from [PastVu](https://pastvu.com/) using [my gem](https://github.com/projecteurlumiere/pastvu)
  - While every cemetery is just a fixed HTML page, 
@@ -33,6 +32,7 @@ However, given the Russian government banned the hosting, alternative solutions 
 ## What's to be done:
 - [ ] Implement a more appropriate thematic design
 - [ ] Compose textual desciprition data
+- [ ] Add data fetching from a 3rd party server (Google Drive) 
 - [ ] Deploy
 
 # Technicalities
